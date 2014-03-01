@@ -15,8 +15,13 @@
     <div>
         <g:render template="layout/menu"></g:render>
         <div>
-            <h3><g:message code="company.list.head" args="[companyCount?:0]"/></h3>
-            <table>
+            <h1><g:message code="company.list.title"></g:message> </h1>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <caption>
+                    <g:message code="company.list.head" args="[companyCount?:0]"/>
+                </caption>
                 <thead>
                     <th>
                         <g:message code="company.name"/>
@@ -64,6 +69,7 @@
                     </g:each>
                 </tbody>
             </table>
+            <g:render template="layout/paginator" model="[offset: offset]"></g:render>
         </div>
     </div>
 </body>

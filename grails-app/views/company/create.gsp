@@ -5,7 +5,14 @@
     <title><g:message code="company.create.title"/> </title>
 </head>
 <body>
-<h1><g:message code="company.create.title"/></h1>
-<g:render template="layout/form" model="['action':'creation']"/>
+<div>
+    <g:render template="layout/menu"></g:render>
+    <div>
+        <h1><g:message code="company.create.title"/></h1>
+    </div>
+    <div>
+        <g:render template="layout/form" model="['action':'creation']"/>
+    </div>
+</div>
 </body>
 </html>

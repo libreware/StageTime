@@ -15,8 +15,14 @@ class CompanyController {
     }
 
     def list(){
-        def result = companyService.getCompanies(params.offset?:0)
-        render view: "list", model: [companies: result.companies, companyCount : result.companyCount]
+        def offset = 0
+        try {
+            offset = Integer.parseInt(params?.offset?:0)
+        }catch (Exception e){
+            offset = 0
+        }
+        def result = companyService.getCompanies(offset)
+        render view: "list", model: [companies: result.companies, companyCount : result.companyCount, offset: offset, nbpages : result.nbPages]
     }
 
     def show(){
@@ -24,7 +30,8 @@ class CompanyController {
         def company
         if(result.error){
             flash.error = result.message
-            redirect(action: "list")
+            //redirect(action: "list")
+            render (view: "list")
         }else{
             flash.success = result.message
             company = result.company
@@ -39,7 +46,8 @@ class CompanyController {
         def company
         if(result.error){
             flash.error = result.message
-            redirect(action: "list")
+            render(view: "list")
+            //redirect(action: "list")
         }else{
             flash.success = result.message
             company = result.company
@@ -66,7 +74,7 @@ class CompanyController {
         def result = companyService.deleteCompany(params)
         if(result.error){
             flash.error = result.message
-            redirect(url: request.getHeader('referer'))
+            render(view: "list")
         }else{
             flash.success = result.message
             redirect(action: "list")
