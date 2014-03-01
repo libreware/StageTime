@@ -45,7 +45,7 @@
 		<label for="accountType" class="col-sm-2 control-label"><g:message
 				code="default.form.accountType" /></label>
 		<div class="col-sm-10">
-			<select class="form-control" id="accoutntType" name="type">
+			<select class="form-control" id="accountType" name="type">
 				<option value="teacher"><g:message code="default.form.select.teacher" /></option>
 				<option value="student"><g:message code="default.form.select.student" /></option>
 				<option value="recruiter"><g:message code="default.form.select.recruiter" /></option>
