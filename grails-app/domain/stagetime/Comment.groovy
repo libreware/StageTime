@@ -9,7 +9,7 @@ class Comment {
     /**
      * References the person that created the comment
      */
-    static belongsTo =  User
+    static belongsTo =  [user:User]
 
     /**
      * Concerned object
