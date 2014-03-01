@@ -4,6 +4,7 @@ import stagetime.security.SessionService
 
 class UserController {
     static scope = "prototype"
+
     def SessionService sessionService
 
     def index() {
@@ -49,6 +50,5 @@ class UserController {
                     filterInstance: FilterService.getFilter(params.id)])
             return false
         }
-
     }
 }

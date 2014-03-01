@@ -1,6 +1,6 @@
 package stagetime
 
-class Student extends User{
+class Student extends User {
 
     /*
      * Curriculum of the student (PDF format)
