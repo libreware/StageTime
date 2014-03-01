@@ -16,9 +16,10 @@ class Recruiter extends User{
     /**
      * The company he works for
      */
-    static belongsTo = Company
+    static belongsTo = [company: Company]
 
     static constraints = {
+        company nullable: true
         job(nullable: false, blank: false)
     }
 }

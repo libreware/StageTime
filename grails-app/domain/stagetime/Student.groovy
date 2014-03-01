@@ -15,5 +15,7 @@ class Student extends User {
     ]
 
     static constraints = {
+        cv nullable: true
+        tutor nullable: true
     }
 }
