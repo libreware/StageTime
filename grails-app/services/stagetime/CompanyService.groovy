@@ -12,9 +12,28 @@ class CompanyService {
    def getCompanies(int offset){
         def max = grailsApplication.config.grails.stagetime.search.max.toInteger()
         def companyCount = Company.count
-        def companies = Company.list(offset: offset, max: max)
-        return [companies :companies, companyCount : companyCount]
+        def companies = Company.list(offset: offset * max, max: max)
+        def numberPages = nbPages(max, companyCount)
+        return [companies :companies, companyCount : companyCount, nbPages: numberPages]
    }
+
+    def nbPages(int max, int qty){
+        def pages
+        if(qty <= 0){
+            pages = 0
+        }else{
+            if(qty <= max){
+                pages =1
+            }else{
+                pages= Math.round(qty / max)
+                if((pages * max) <  qty )
+                {
+                    pages = pages + 1
+                }
+            }
+        }
+        return pages
+    }
 
     def saveCompany(Map params){
         def hasError = false

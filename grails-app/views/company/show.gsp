@@ -14,43 +14,47 @@
 <body>
 <div>
     <g:render template="layout/menu"></g:render>
-    <a href="<g:createLink action="edit" id="${company?.id}"/>"> <g:message code="company.edit"></g:message>  </a>
-    <a href="<g:createLink action="delete" id="${company?.id}"/>"> <g:message code="company.delete"></g:message>  </a>
-    <div style="margin-left: 10px;margin-top: 10px">
-        <p >
-            <strong>
-                <g:message code="company.name"/>
-            </strong>
-            <span>
-                ${company.name}
-            </span>
-        </p>
-        <p>
-            <strong>
-                <g:message code="company.size"/>
-            </strong>
-            <span>
-                ${company.size}
-            </span>
-        </p>
-        <p>
-            <strong>
-                <g:message code="company.webSite"/>
-            </strong>
-            <span>
-                ${company.webSite}
-            </span>
-        </p>
+    <div>
+        <h1><g:message code="company.show.go" args="[company.name]"></g:message></h1>
+        <a class="btn-success" href="<g:createLink action="edit" id="${company?.id}"/>"> <g:message code="company.edit"></g:message>  </a>
+        <a class="btn-danger" href="<g:createLink action="delete" id="${company?.id}"/>"> <g:message code="company.delete"></g:message>  </a>
     </div>
-    <div style="margin-top: 15px; ">
-           <div style="width: 48%; float: left">
-               <h3> <g:message code="company.keywords.list" /></h3>
-               <g:each var="keyword" in="${company.keywords}">
-                   <div>
-                       ${keyword.tag}
-                   </div>
-               </g:each>
-           </div>
+    <div>
+        <div style="margin-left: 10px;margin-top: 10px">
+            <p >
+                <strong>
+                    <g:message code="company.name"/>
+                </strong>
+                <span>
+                    ${company.name}
+                </span>
+            </p>
+            <p>
+                <strong>
+                    <g:message code="company.size"/>
+                </strong>
+                <span>
+                    ${company.size}
+                </span>
+            </p>
+            <p>
+                <strong>
+                    <g:message code="company.webSite"/>
+                </strong>
+                <span>
+                    ${company.webSite}
+                </span>
+            </p>
+        </div>
+        <div style="margin-top: 15px; ">
+            <div style="width: 48%; float: left">
+                <h3> <g:message code="company.keywords.list" /></h3>
+                <g:each var="keyword" in="${company.keywords}">
+                    <div>
+                        ${keyword.tag}
+                    </div>
+                </g:each>
+            </div>
             <div style="width: 48%; float: right">
                 <h3><g:message code="company.comments"/> </h3>
                 <g:each var="comment" in="${company.comments}">
@@ -60,6 +64,7 @@
                     </span>
                 </g:each>
             </div>
+        </div>
     </div>
 </div>
 

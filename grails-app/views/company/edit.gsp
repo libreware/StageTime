@@ -13,7 +13,14 @@
 </head>
 
 <body>
+<div>
     <g:render template="layout/menu"></g:render>
-    <g:render template="layout/form" model="['action':'edit', 'company' : company]"/>
+    <div>
+        <h1><g:message code="company.edit.title"></g:message></h1>
+    </div>
+    <div>
+        <g:render template="layout/form" model="['action':'edit', 'company' : company]"/>
+    </div>
+</div>
 </body>
 </html>
