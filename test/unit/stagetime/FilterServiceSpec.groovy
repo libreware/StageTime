@@ -57,14 +57,28 @@ class FilterServiceSpec extends Specification {
     void "Filter Removing"() {
 
         given:
+        boolean ret
         GroovyMock(Filter, global:true)
         Filter filter = Mock()
 
         and:
         1 * Filter.get(_) >> filter
         (0..1) * filter.delete() >> true
+        (1..2) * filter.getName() >> name
 
+        try {
+            ret = FilterService.removeFilter(1)
+        }
+        catch (IllegalArgumentException ex) {
+            ret = false;
+        }
         expect:
-        FilterService.removeFilter(1)
+            ret == expectedReturn
+
+        where:
+            name                    | expectedReturn
+            "bla"                   | true
+            "Favoris"               | false
+            "Candidatures"          | false
     }
 }

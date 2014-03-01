@@ -26,14 +26,15 @@ class FilterService {
         return (filter != null)
     }
 
-    public static boolean removeFilter(long filterId){
+    public static boolean removeFilter(long filterId) throws IllegalArgumentException{
         Filter filter = Filter.get(filterId)
-        try{
-            filter.delete(flush: true)
-            return true
-        } catch (Exception e){
-            return false
+        if (filter.getName() == "Favoris" || filter.getName() == "Candidatures") {
+            throw new IllegalArgumentException("Cannot delete favorites or appliances filters.")
         }
+        if (filter == null) return false
+
+        filter.delete(flush: true)
+        return true
     }
 
     public static Filter getFilter(int id){
