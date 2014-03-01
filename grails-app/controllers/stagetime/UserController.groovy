@@ -27,7 +27,7 @@ class UserController {
      */
     def create() {
 
-        render view: 'create', model:[params: params, companiesList: [new Company(name: 'company 1'), new Company(name: 'company 1')]]
+        render view: 'create', model:[params: params, companiesList: []]
     }
 
     /**
