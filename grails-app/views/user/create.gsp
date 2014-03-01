@@ -7,7 +7,7 @@
 	<h1>
 	<g:message code="default.form.title.createuser"/>
 	</h1>
-	<g:form class="form-horizontal" action="create" role="form">
+	<g:form class="form-horizontal" action="save" role="form">
 		<g:render template="formUser" />
 		<div class="form-group"></div>
 		<div id="formCompany">

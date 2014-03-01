@@ -9,15 +9,15 @@ class UserService {
 
 
     static def createStudent(Student student, boolean fromAdministrator){
-        createUser(student)
+        createUser(student, fromAdministrator)
     }
 
     static def createTeacher(Teacher teacher, boolean fromAdministrator){
-        createUser(teacher)
+        createUser(teacher, fromAdministrator)
     }
 
     static def createRecruiter(Recruiter recruiter, Company company, boolean fromAdministrator){
-        createUser(recruiter)
+        createUser(recruiter, fromAdministrator)
         company.addToEmployees(recruiter)
         recruiter.save(flush: true)
     }
