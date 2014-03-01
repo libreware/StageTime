@@ -74,6 +74,8 @@ class SimpleSecService {
         } else {
             if ( user != null ) {
                 sessionService.eraseAttempts()
+                this.connectedUsers.put(user,GeneralService.getTime())
+                sessionService.setUser(user)
                 return true
             }else {
                 sessionService.recordAttempt()
