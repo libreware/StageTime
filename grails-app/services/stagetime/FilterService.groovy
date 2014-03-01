@@ -1,24 +1,21 @@
 package stagetime
 
 import grails.transaction.Transactional
+import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
 
 @Transactional
 class FilterService {
-    public boolean createFilter(String name, user, List<Keyword> keywords) {
-        Filter filter = new Filter(
-                keywords: keywords, name: name,
-                mailOnComment: false, notifyOnComment: false,
-                mailNotification: false, enabled: true)
-
+    public static boolean createFilter(Filter filter, user) {
         if (!filter.validate()) return false
 
         if (!user.isAttached()) {
             user.attach()
         }
-        user.addToFilters(flush:true, filter)
+
+        return user.addToFilters(filter)
     }
 
-    public boolean updateFilter(long filterId, Map<String,Object> params){
+    public static boolean updateFilter(long filterId, GrailsParameterMap params){
         Filter filter = Filter.get(filterId)
 
         filter.setProperties(params)
@@ -28,10 +25,15 @@ class FilterService {
         return (filter != null)
     }
 
-    public boolean removeFilter(long filterId){
+    public static boolean removeFilter(long filterId) throws IllegalArgumentException{
         Filter filter = Filter.get(filterId)
+        if (filter.getName() == "Favoris" || filter.getName() == "Candidatures") {
+            throw new IllegalArgumentException("Cannot delete favorites or appliances filters.")
+        }
         if (filter == null) return false
+
         filter.delete(flush: true)
+        return true
     }
 
     public static Filter getFilter(int id){
