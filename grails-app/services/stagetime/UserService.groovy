@@ -16,10 +16,8 @@ class UserService {
         createUser(teacher, fromAdministrator)
     }
 
-    static def createRecruiter(Recruiter recruiter, Company company, boolean fromAdministrator){
+    static def createRecruiter(Recruiter recruiter, boolean fromAdministrator){
         createUser(recruiter, fromAdministrator)
-        company.addToEmployees(recruiter)
-        recruiter.save(flush: true)
     }
 
     static private boolean createUser(User user, boolean fromAdministrator){

@@ -1,7 +1,5 @@
 package stagetime
 
-import stagetime.security.SimpleSecService
-
 class UserController {
 
     private final static REDIRECT_CREATE = 'create'
@@ -27,7 +25,7 @@ class UserController {
      */
     def create() {
 
-        render view: 'create', model:[params: params, companiesList: []]
+        render view: 'create', model:[companiesList: []]
     }
 
     /**
@@ -45,53 +43,53 @@ class UserController {
 
         def user
 
-        println params
+        if(request.method == 'POST'){
 
-        if(!params.id){
+            println params
 
-            if(params.password == params.passwordConfirm) {
-                params.hashedPassword = SimpleSecService.encrypt(params.password)
-                params.password = ''
-                params.passwordConfirm = ''
+            if(!params.id){
 
                 def saveResult
 
                 switch(params.type) {
                     case 'student':
                         user = new Student(params)
-                        handlerSaveStudent(user)
+                        savePassword(user, params.password, params.passwordConfirm)
+                        saveResult = handlerSaveStudent(user)
                         break;
                     case 'teacher':
                         user = new Teacher(params)
+                        savePassword(user, params.password, params.passwordConfirm)
                         saveResult = handlerSaveTeacher(user)
                         break;
                     case 'recruiter':
                         user = new Recruiter(params)
-                        saveResult = handlerSaveRecruiter(user, params)
+                        savePassword(user, params.password, params.passwordConfirm)
+                        saveResult = handlerSaveRecruiter(user)
                     default: break;
                 }
 
-                if(!saveResult){
-                    flash.error = 'user.create.error'
-                    redirect action: REDIRECT_CREATE
-                    return false
-                } else {
-                    flash.message = 'user.create.success'
+                if(saveResult){
                     redirect action: 'show', id: user.getId()
-                    return
+                    return true
                 }
 
             } else {
-                flash.error = 'user.create.error.password'
-                params.password = ''
-                params.passwordConfirm = ''
-                redirect action: REDIRECT_CREATE, params: params
-                return false
+                // TODO: update user
             }
+        }
 
-            redirect action: REDIRECT_CREATE
+        flash.error = 'user.create.error'
+        render view: 'create', model:[user: user, companiesList: []]
+    }
+
+    private boolean savePassword(User user, String password1, String password2){
+        if(password1 != password2 || password1 == ''){
+            user.errors.rejectValue('hashedPassword', 'user.create.error.passwordConfirm')
+            return false
         } else {
-            // TODO: update user
+            user.hashedPassword = password1
+            return true
         }
     }
 
@@ -111,48 +109,8 @@ class UserController {
         return UserService.createTeacher(user, true) // TODO: parameter
     }
 
-    private boolean handlerSaveRecruiter(Recruiter user, Map params){
-
-        def saveResult = false
-        if(params.company){
-            def company
-            def companyDefined = true
-            def sizeDefined = true
-            if(params.company.long('id')){
-                company = CompanyService.getCompany(params.company.long('id'))
-            } else {
-                company = new Company(params.company)
-                switch(params.company.size){
-                    case 'TPE': company.size = CompanySize.TPE; break
-                    case 'PME': company.size = CompanySize.PME; break
-                    case 'TPE': company.size = CompanySize.ETI; break
-                    case 'TPE': company.size = CompanySize.GE; break
-                    default: sizeDefined = false
-                }
-                if(sizeDefined){
-                    if(!CompanyService.createCompany(company)){
-                        companyDefined = false
-                    }
-                }
-            }
-            if(companyDefined && sizeDefined){
-                saveResult = UserService.createRecruiter(user, company, true)
-            } else if(!companyDefined){
-                flash.error = 'company.create.error'
-                redirect action: REDIRECT_CREATE
-                return false
-            } else if(!sizeDefined){
-                flash.error = 'company.create.error.size'
-                redirect action: REDIRECT_CREATE
-                return false
-            }
-        } else {
-            flash.error = 'user.create.error.company'
-            redirect action: REDIRECT_CREATE
-            return false
-        }
-
-        return saveResult
+    private boolean handlerSaveRecruiter(Recruiter user){
+        return UserService.createRecruiter(user, true) // TODO: parameter
     }
 
 

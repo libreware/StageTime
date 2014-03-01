@@ -7,6 +7,7 @@
 
 <body>
     <h1>${user.firstName} ${user.secondName}</h1>
+    <h2>${user.email} - ${user.phoneNumber}</h2>
 
 </body>
 </html>

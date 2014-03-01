@@ -60,6 +60,10 @@
 			<!-- body layout -->
 			<g:layoutBody/>
 		</div>
+
+        <br /> <!-- TODO -->
+        <br />
+
 		<footer class="well">
 			<div class="container">
 				<div class="row">
