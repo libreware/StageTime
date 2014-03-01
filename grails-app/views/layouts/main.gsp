@@ -46,13 +46,13 @@
 				</div>
 			</g:if>
 			<g:if test="${ flash.error }" >
-				<div class="alert alert-error">
+				<div class="alert alert-danger">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 					<g:message code="${ flash.error }" args="${ flash.args }"/>
 				</div>
 			</g:if>
 			<g:if test="${ flash.success }" >
-				<div class="alert alert-danger">
+				<div class="alert alert-success">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 					<g:message code="${ flash.success }" args="${ flash.args }"/>
 				</div>
