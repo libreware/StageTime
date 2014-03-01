@@ -13,7 +13,7 @@
 		<h1><g:message code="default.form.title.company" /></h1>
 		<g:render template="companyForm" />
 		<div class="col-sm-offset-2 col-sm-10">
-			<button type="submit" class="btn btn-default">
+			<button type="submit" class="btn btn-default" >
 				<g:message code="default.form.submit" />
 			</button>
 		</div>
