@@ -12,8 +12,6 @@ import spock.lang.Specification
 @Mock([Company])
 class CompanyServiceSpec extends Specification {
 
-    @Shared
-    CompanyService companyService
 
     def setup() {
     }
@@ -22,19 +20,15 @@ class CompanyServiceSpec extends Specification {
     }
 
     void "Company are well retreived"() {
-
         given: "A company"
+        GroovyMock(Company, global: true)
+        Company company = Mock()
 
-        Company.get(_) >> companyReturned
+        and:
+        1 * Company.get(_) >> company
 
         expect:
-        companyService.getCompany(company.id) == companyExcepted
-
-        where:
-        companyReturned | companyExcepted
-        new Company()   | new Company()
-        null            | null
-
+        CompanyService.getCompany(0) == company
 
     }
 }

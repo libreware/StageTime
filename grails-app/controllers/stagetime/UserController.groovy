@@ -7,9 +7,6 @@ class UserController {
     /**
      * List entities
      */
-    def userService
-    def companyService
-
     def index() { }
 
     /**
@@ -52,11 +49,11 @@ class UserController {
                 switch(params.type) {
                     case 'student':
                         user = new Student(params)
-                        saveResult = userService.createStudent(user, true)
+                        saveResult = UserService.createStudent(user, true)
                         break;
                     case 'teacher':
                         user = new Teacher(params)
-                        saveResult = userService.createTeacher(user, true)
+                        saveResult = UserService.createTeacher(user, true)
                         break;
                     case 'recruiter':
                         user = new Recruiter(params)
@@ -65,7 +62,7 @@ class UserController {
                             def companyDefined = true
                             def sizeDefined = true
                             if(params.company.long('id')){
-                                company = companyService.getCompany(params.company.long('id'))
+                                company = CompanyService.getCompany(params.company.long('id'))
                             } else {
                                 company = new Company(params.company)
                                 switch(params.company.size){
@@ -76,13 +73,13 @@ class UserController {
                                     default: sizeDefined = false
                                 }
                                 if(sizeDefined){
-                                    if(!companyService.createCompany(company)){
+                                    if(!CompanyService.createCompany(company)){
                                         companyDefined = false
                                     }
                                 }
                             }
                             if(companyDefined && sizeDefined){
-                                saveResult = userService.createRecruiter(user, company, true)
+                                saveResult = UserService.createRecruiter(user, company, true)
                             } else if(!companyDefined){
                                 flash.error = 'company.create.error'
                             } else if(!sizeDefined){
