@@ -1,6 +1,5 @@
 package stagetime
 
-
 class Filter {
 
     /**
@@ -42,9 +41,17 @@ class Filter {
     /**
      * Owner of the filter, person to be notified when a new matching offer appear
      */
-    static belongsTo = User
+    static belongsTo = [user:User]
 
+    // Make sure one user can't have filters with the same name !
     static constraints = {
-        name(nullable:false, blank: false, unique: false)//  TODO : make custom constraint : must be different from favorite and appliance
+
+        name validator: { val, obj ->
+            for (Filter f : obj.user.filters) {
+                if (f.name == val) return false;
+            }
+            return true;
+        }
+        name(nullable:false, blank: false, unique: false)
     }
 }

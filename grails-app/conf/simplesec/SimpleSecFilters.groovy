@@ -10,7 +10,6 @@ class SimpleSecFilters {
             before = {
                 def securityService = new SimpleSecService()
                 def sessionService = new SessionService()
-
                 if (!actionName.equals('login') && !actionName.equals('create') && !request.forwardURI.equals("/StageTime/")) {
                     if (!securityService.isUserLoggedIn(sessionService.getUser())){
                         sessionService.setWaypoint(controllerName,actionName)
