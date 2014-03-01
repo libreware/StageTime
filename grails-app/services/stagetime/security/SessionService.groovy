@@ -26,7 +26,7 @@ class SessionService implements InitializingBean{
     private String waypointController
     private String waypointAction
 
-    private user
+    private User user
 
     int numberOfConnections
     Date lastConnectionTime
@@ -70,8 +70,12 @@ class SessionService implements InitializingBean{
         this.waypointAction = action
     }
 
-    public User getUser(){
+    public getUser(){
         return this.user;
+    }
+
+    public setUser(user){
+        this.user = user
     }
 
     /**

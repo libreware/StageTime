@@ -4,7 +4,7 @@ package stagetime
  * Abstract domain user class. Only used for inheritance.
  * Should not be modified.
  */
-abstract class User {
+abstract class User<D> {
 
     /**
      * First name of the user (familly name)
@@ -52,6 +52,12 @@ abstract class User {
      */
     boolean isValid = false
 
+    /**
+     * Type
+     * @return
+     */
+    String type
+
     @Override
     String toString() {
         return (firstName + " " + secondName)
@@ -63,5 +69,11 @@ abstract class User {
         email(email:true, nullable:false, blank: false, unique: true)
         hashedPassword(nullable:false, blank: false)
         phoneNumber(nullable:true, blank: true)
+    }
+
+    def D instanciate(){
+        if (type == "Student") return Student.get(this.id)
+        if (type == "Teacher") return Teacher.get(this.id)
+        if (type == "Recruiter") return Recruiter.get(this.id)
     }
 }
