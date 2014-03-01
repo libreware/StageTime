@@ -21,6 +21,13 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label for="password" class="col-sm-2 control-label"><g:message
+				code="default.form.passwordConfirm" /></label>
+		<div class="col-sm-10">
+			<input type="password" name="passwordConfirm" class="form-control" />
+		</div>
+	</div>
+	<div class="form-group">
 		<label for="email" class="col-sm-2 control-label"><g:message
 				code="default.form.email" /></label>
 		<div class="col-sm-10">
@@ -32,6 +39,17 @@
 				code="default.form.phone" /></label>
 		<div class="col-sm-10">
 			<input type="number" name="phoneNumber" class="form-control" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="accountType" class="col-sm-2 control-label"><g:message
+				code="default.form.accountType" /></label>
+		<div class="col-sm-10">
+			<select class="form-control">
+				<option><g:message code="default.form.select.teacher" /></option>
+				<option><g:message code="default.form.select.student" /></option>
+				<option><g:message code="default.form.select.recruiter" /></option>
+			</select>
 		</div>
 	</div>
 </div>
