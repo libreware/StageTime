@@ -13,7 +13,7 @@
 		<div class="col-sm-10">
 			<select class="form-control" id="size" name="size">
 				<g:each var="size" in="${CompanySize.values()}">
-					<option>
+					<option value="${ size.toString()}">
 						${ size.toString()}
 					</option>
 				</g:each>
