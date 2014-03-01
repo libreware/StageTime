@@ -4,6 +4,9 @@
 <title><g:message code="default.form.title.createuser" /></title>
 </head>
 <body>
+	<h1>
+	<g:message code="default.form.title.createuser"/>
+	</h1>
 	<g:form class="form-horizontal" action="create" role="form">
 		<g:render template="formUser" />
 		<div class="form-group"></div>

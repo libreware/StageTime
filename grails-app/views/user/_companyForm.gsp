@@ -4,7 +4,7 @@
 		<label for="name" class="col-sm-2 control-label"><g:message
 				code="default.form.company.name" /></label>
 		<div class="col-sm-10">
-			<input type="text" name="name" class="form-control" />
+			<input type="text" name="name" class="form-control" id="name"/>
 		</div>
 	</div>
 	<div class="form-group">
