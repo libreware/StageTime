@@ -23,11 +23,10 @@ class SessionService implements InitializingBean{
      */
     public static int MAX_LOGIN_ATTEMPTS
 
-
     private String waypointController
     private String waypointAction
 
-    private User user;
+    private user
 
     int numberOfConnections
     Date lastConnectionTime
