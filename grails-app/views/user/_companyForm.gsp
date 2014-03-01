@@ -1,30 +1,20 @@
 <%@page import="stagetime.CompanySize"%>
 <div>
 	<div class="form-group">
-		<label for="name" class="col-sm-2 control-label"><g:message
-				code="default.form.company.name" /></label>
+		<label for="job" class="col-sm-2 control-label"><g:message
+				code="default.form.company.job" /></label>
 		<div class="col-sm-10">
-			<input type="text" name="name" class="form-control" id="name"/>
+			<input type="text" name="job" class="form-control" id="job" value="${ params?.job }"/>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="size" class="col-sm-2 control-label"><g:message
-				code="default.form.company.size" /></label>
-		<div class="col-sm-10">
-			<select class="form-control" id="size" name="size">
-				<g:each var="size" in="${CompanySize.values()}">
-					<option value="${ size.toString()}">
-						${ size.toString()}
-					</option>
-				</g:each>
-			</select>
+		<label for="companyName" class="col-sm-2 control-label"><g:message
+				code="default.form.title.company" /></label>
+		<div class="col-sm-8">
+			<g:select name="companyName" from="${ companiesList }" class="form-control" value="${ params?.companyName }" id="companyName"/>
 		</div>
-	</div>
-	<div class="form-group">
-		<label for="webSite" class="col-sm-2 control-label"><g:message
-				code="default.form.company.webSite" /></label>
-		<div class="col-sm-10">
-			<input type="url" name="website" class="form-control" id="webSite"/>
+		<div class="col-sm-2">
+			<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>&nbsp;<g:message code="default.form.compny.add" /></button>
 		</div>
 	</div>
 </div>
