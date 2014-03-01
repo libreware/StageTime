@@ -17,26 +17,23 @@ class UserController {
             // if user try to edit a filter
             if (request.method == 'POST') {
                 // if a form was posted and the filter can be updated
-                if (FilterService.updateFilter(params.id,params)) {
-                    flash.success = "filter.update.success"
-                    render(view: "viewFilter", model:[userInstance: user,
-                            filterInstance: FilterService.getFilter(params.id)])
-                    return true
-                } else {
+                if (!FilterService.updateFilter(params.id,params)) {
                     flash.error = "filter.update.failed"
-                    render(view: "editFilter", model:[userInstance: user,
-                                    filterInstance: FilterService.getFilter(params.id)])
-                    return false
                 }
-            }else {
-                // If the form is to be displayed
-                render(view: 'editFilter', model:[userInstance: user,
-                        filterInstance: FilterService.getFilter(params.id)])
             }
+            // If the form is to be displayed
+            render(view: 'editFilter', model:[userInstance: user,
+                    filterInstance: FilterService.getFilter(params.id)])
+            return true
+
         } else if (params.id != null){
             render(view: 'viewFilter', model:[userInstance: user,
                     filterInstance: FilterService.getFilter(params.id)])
-        }else render(view: 'myFilters', model:[userInstance: user, filterList:user.getFilters()])
+            return true
+        }else {
+            render(view: 'myFilters', model:[userInstance: user, filterList:user.getFilters()]
+            return true
+        }
     }
 
     def deleteFilter(){
